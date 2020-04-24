@@ -1,0 +1,26 @@
+
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Doppelkopf</h1>
+    <%=@cards%>
+    <%=@deck%>
+    <%=@game%>
+    <%=@card%>
+   
+
+    <div class="row">
+      <div class="large-6 columns">
+        <%# @game.hands.take(2).each do |hand| %>
+            <%#= render partial: 'computer_player', locals: {hand: hand, game: @game, reveal_cards: true} %>
+        <%# end %>
+      </div>
+      <div class="large-6 columns">
+        <%# @game.hands.drop(2).take(2).each do |hand| %>
+            <%#= render partial: 'computer_player', locals: {hand: hand, game: @game, reveal_cards: true} %>
+        <%# end %>
+      </div>
+    </div>
+    <%#= render partial: 'human_player', locals: { game: @game } %>
+    <%=link_to "Play again!", :home_index, class: "button" %>
+  </div>
+</div>
