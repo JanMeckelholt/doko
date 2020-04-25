@@ -1,46 +1,13 @@
 class Hand < ActiveRecord::Base
+has_many :cards
 
-attr_accessor :cards, :id, :pairs
 
-  def initialize(params)
-    super
-    @id = :id
-    @cards = []
-  end
 
-  def draw(card)
-    raise "Hand is full" if hand_is_full?
-    @cards << card
-    if hand_is_full?
-      sort_cards!
-      @rank = get_rank
-    end
-  end
 
-  def draw_from(deck)
-    draw(deck.deal)
-  end
 
-  def hand_is_full?
-    @cards.length == 5
-  end
 
-  def high_card
-    @cards.last
-  end
 
-  def highest_pair_value
-    @pairs.keys.map {|k| Card.all_values[k]}.max
-  end
 
-  def rank
-    return :empty_or_partial_hand unless hand_is_full?
-    @rank
-  end
-
-  def to_s
-    @cards.each { |card| card.to_s }
-  end
 
   private
   def card_suits

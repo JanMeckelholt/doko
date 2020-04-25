@@ -20,7 +20,7 @@ class Game < ActiveRecord::Base
     #@deck.build_deck()
   end
 
-  private
+
   def initialize_players(names)
     @players = Hash.new(0)
     names.each { |name| @players[SecureRandom.uuid] = name }
