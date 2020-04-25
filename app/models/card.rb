@@ -1,28 +1,21 @@
-class Card < ActiveRecord::Base
-  belongs_to :deck
-  belongs_to :hand
+class Card #< ActiveRecord::Base
+  include ActiveModel::Model
+  #belongs_to :deck
+  #belongs_to :hand
 
-  @@suits = [:club, :spade, :diamond, :heart]
+  @@suits = [:kreuz, :pick, :herz, :karo]
   @@values = {
-      :two => 2,
-      :three => 3,
-      :four => 4,
-      :five => 5,
-      :six => 6,
-      :seven => 7,
-      :eight => 8,
-      :nine => 9,
-      :ten => 10,
-      :jack => 11,
-      :queen => 12,
-      :king => 13,
-      :ace => 14
+      :zehn => 10,
+      :bube => 11,
+      :dame => 12,
+      :koenig => 13,
+      :ass => 14
   }
-  #def initialize(value, suit)
+  def initialize(value, suit)
   #  super
-  #  @value = value
-  #  @suit = suit
-  #end
+    @value = value
+    @suit = suit
+  end
   
   def value
     @value
@@ -37,7 +30,7 @@ class Card < ActiveRecord::Base
   end
 
   def to_s
-    @value.to_s.capitalize << " of " << @suit.to_s.capitalize.pluralize
+    @suit.to_s.capitalize << " " << @value.to_s.capitalize
   end
 
   def self.all_suits

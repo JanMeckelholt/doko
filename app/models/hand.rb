@@ -1,7 +1,21 @@
-class Hand < ActiveRecord::Base
-has_many :cards
+class Hand #< ActiveRecord::Base
+  include ActiveModel::Model
+#has_many :cards
 
+  attr_accessor :hand_cards
 
+  def initialize(id=0)
+    @id = id
+    @hand_cards = []
+  end
+
+  def add_card(card)
+    @hand_cards << card
+  end
+
+  #def hand_cards
+  #  @hand_cards
+  #end
 
 
 

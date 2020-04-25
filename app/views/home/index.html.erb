@@ -3,7 +3,17 @@
   <div class="large-12 columns">
     <h1>Doppelkopf</h1>
 
-    <%=@deck_cards%>
+    <p>Karten im Spiel: <%=@deck_cards.count%></p>
+    <p>Erste Karte: <%=@deck_cards.first%></p>
+    <p>Karten: <%=@deck_cards%></p>
+<%#byebug%>
+    <p>Karten im Hand1: <%=@hand1.hand_cards.count%></p>
+    <p>Karten in Hand1: <%=@hand1.hand_cards%></p>
+    <%@hand1.hand_cards.each do |card| %>
+      <p><%= card.to_s %></p>
+
+    <%end%>
+
 
     <p>test</p>
    

@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     @deck = Deck.new
     @deck_cards = @deck.deck_cards
     @hand1 = Hand.new
-    @hand1 = @deck_cards[1]
+    @hand1 = @deck.deal_to(@hand1)
     
 
     #@hand1.cards.build(id: @cards[1].id)
