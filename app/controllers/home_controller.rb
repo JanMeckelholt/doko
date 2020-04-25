@@ -2,29 +2,26 @@ class HomeController < ApplicationController
    def index
 
    
-    #@game = Game.new()
-    #@deck = Deck.new()
-    @deck = Deck.new
-    @deck_cards = @deck.deck_cards
-    @hand1 = Hand.new
-    @hand1 = @deck.deal_to(@hand1)
+    @game = Game.new()
+    @game.start()
+
+    @deck_cards = @game.deck.deck_cards
+    @hands = @game.hands
+    @players = @game.players
     
+    @hand1 = @hands[0]
+    @player1 = @players[0]
 
-    #@hand1.cards.build(id: @cards[1].id)
-    
-#byebug
+    @hand2 = @hands[1]
+    @player2 = @players[1]
 
-    #@hand1.cards = @cards
-    #@hand2 = Hand.new()
-    #@hand3 = Hand.new()
-    #@hand4 = Hand.new()
+    @hand3 = @hands[2]
+    @player3 = @players[2]
 
-    #@card = Card.new(value: 10, suit: "spades")
-    #@game.start()
+    @hand4 = @hands[3]
+    @player4 = @players[3]
 
-    #byebug
-    
-   # @game.start
+
    # scorer = GameScorer.new(@game)
    # session[:the_game] = @game
    # session[:the_score] = scorer

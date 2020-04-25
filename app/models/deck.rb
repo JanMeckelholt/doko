@@ -2,7 +2,7 @@ class Deck
   include ActiveModel::Model
   #has_many :cards
 
-  attr_reader :deck_cards
+  attr_accessor :deck_cards
 #  attr_reader :cards
 
   def initialize

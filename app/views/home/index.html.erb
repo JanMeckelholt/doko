@@ -3,34 +3,27 @@
   <div class="large-12 columns">
     <h1>Doppelkopf</h1>
 
-    <p>Karten im Spiel: <%=@deck_cards.count%></p>
-    <p>Erste Karte: <%=@deck_cards.first%></p>
-    <p>Karten: <%=@deck_cards%></p>
+    <p>Players: <%=@players%></p>
+    <p>Erster Player: <%=@players[0]%></p>
+   
 <%#byebug%>
     <p>Karten im Hand1: <%=@hand1.hand_cards.count%></p>
-    <p>Karten in Hand1: <%=@hand1.hand_cards%></p>
     <%@hand1.hand_cards.each do |card| %>
       <p><%= card.to_s %></p>
-
     <%end%>
 
 
     <p>test</p>
+
    
 
     <div class="row">
       <div class="large-6 columns">
-        <%# @game.hands.take(2).each do |hand| %>
-            <%#= render partial: 'computer_player', locals: {hand: hand, game: @game, reveal_cards: true} %>
-        <%# end %>
-      </div>
-      <div class="large-6 columns">
-        <%# @game.hands.drop(2).take(2).each do |hand| %>
-            <%#= render partial: 'computer_player', locals: {hand: hand, game: @game, reveal_cards: true} %>
-        <%# end %>
-      </div>
+        <% @game.hands.take(3).each do |hand| %>
+            <%= render partial: 'computer_player', locals: {hand: hand, game: @game, reveal_cards: true} %>
+        <% end %>
     </div>
-    <%#= render partial: 'human_player', locals: { game: @game } %>
+    <%= render partial: 'human_player', locals: { game: @game, hand: @game.hands[3] } %>
     <%=link_to "Play again!", :home_index, class: "button" %>
   </div>
 </div>

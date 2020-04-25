@@ -1,19 +1,19 @@
-<div class="hand <%= @game.players[hand.id] %>">
+<div class="hand <%= @players[0] %>">
   <div class="row">
     <div class="large-2 columns text-center">
-      <div class="avatar" style="background: #fff url(/assets/<%=  @game.players[hand.id].downcase.tr(" " , "-") %>.jpg) no-repeat top center; background-size: auto 100%;"></div>
-      <span class="player-name"><%= @game.players[hand.id] %></span>
+      <div class="avatar" style="background: #fff url(/assets/<%=  @game.players[0].downcase.tr(" " , "-") %>.jpg) no-repeat top center; background-size: auto 100%;"></div>
+      <span class="player-name"><%= @players[0] %></span>
     </div>
     <div class="large-10 columns">
       <ul class="large-block-grid-5 cards">
         <% if reveal_cards %>
 
-            <% hand.cards.each do |card| %>
-                <li><img src="/assets/cards/<%= card.to_s.downcase.tr(" ", "-") %>.png"></li>
+            <% hand.hand_cards.each do |card| %>
+                <img src="/assets/cards/<%= card.to_s.tr(" ", "-") %>.png">
             <% end %>
 
         <% else %>
-            <% hand.cards.each do |card| %>
+            <% hand.hand_cards.each do |card| %>
                 <li><%= image_tag("/assets/cards/back-panel.png") %></li>
             <% end %>
         <% end %>

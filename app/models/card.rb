@@ -3,13 +3,13 @@ class Card #< ActiveRecord::Base
   #belongs_to :deck
   #belongs_to :hand
 
-  @@suits = [:kreuz, :pick, :herz, :karo]
+  @@suits = [:kreuz, :pik, :herz, :karo]
   @@values = {
       :zehn => 10,
-      :bube => 11,
-      :dame => 12,
-      :koenig => 13,
-      :ass => 14
+      :bube => 2,
+      :dame => 3,
+      :koenig => 4,
+      :ass => 11
   }
   def initialize(value, suit)
   #  super
@@ -30,7 +30,7 @@ class Card #< ActiveRecord::Base
   end
 
   def to_s
-    @suit.to_s.capitalize << " " << @value.to_s.capitalize
+    @suit.to_s.capitalize << "_" << @value.to_s.capitalize
   end
 
   def self.all_suits
