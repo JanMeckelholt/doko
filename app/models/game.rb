@@ -18,12 +18,13 @@ class Game #< ActiveRecord::Base
   def start
     @hands.each do |hand|
       @deck.deal_to(hand)
+      hand.sort_cards
     end
   end
 
 
   def initialize_players(names)
-    @players = Hash.new(0)
+    @players = []
     i = 0
     names.each do |name| 
       @players[i] = name 
@@ -33,7 +34,7 @@ class Game #< ActiveRecord::Base
 
   def initialize_hands
     @hands = []
-    @players.keys.each do |player| 
+    @players.each do |player| 
       @hands << Hand.new(player) 
     end
   end

@@ -49,6 +49,7 @@ body {
 
 .You .cards img,  {
   border-radius:8px;
+
 }
 
 .avatar {
@@ -75,4 +76,16 @@ body {
     visibility: visible;
     display: inline;
   }
+
+
+.card {
+	background-color: #2d3339;
+	border-radius: 6px;
+	padding-top: 8px;
+}
+
+.table{
+	background-color: blue;
+}
+
 }

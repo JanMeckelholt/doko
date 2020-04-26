@@ -4,20 +4,16 @@
       <div class="avatar" style="background: #fff url(/assets/<%=  @game.players[0].downcase.tr(" " , "-") %>.jpg) no-repeat top center; background-size: auto 100%;"></div>
       <span class="player-name"><%= @players[0] %></span>
     </div>
-    <div class="large-10 columns">
-      <ul class="large-block-grid-5 cards">
-        <% if reveal_cards %>
-
-            <% hand.hand_cards.each do |card| %>
-                <img src="/assets/cards/<%= card.to_s.tr(" ", "-") %>.png">
-            <% end %>
-
-        <% else %>
-            <% hand.hand_cards.each do |card| %>
-                <li><%= image_tag("/assets/cards/back-panel.png") %></li>
-            <% end %>
-        <% end %>
-      </ul>
-    </div>
   </div>
+
+  <div class="row small-up-2 medium-up-3 large-up-4">
+    <% hand.hand_cards.each do |card| %>
+      <div class="column column-block">
+        <img src="/assets/cards/<%= card.to_s.tr(" ", "-") %>.png">
+      </div>
+    <% end %>
+
+
+  </div>
+  
 </div>
