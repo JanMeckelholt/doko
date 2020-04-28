@@ -10,7 +10,7 @@ class Game < ActiveRecord::Base
 
 
 
- attr_accessor :deck, :hands, :players
+ attr_accessor :deck #, :hands, :players
 
   #def initialize
  
@@ -25,10 +25,17 @@ class Game < ActiveRecord::Base
   #end
 
   def start
-    @hands.each do |hand|
-      @deck.deal_to(hand)
-      hand.sort_cards
-    end
+    @deck = Deck.create!
+    @deck.build_deck
+    @deck.shuffle
+    @deck.save
+    #self.players each do |player|
+    #  @deck.deal_to(player.hand)
+
+    #@hands.each do |hand|
+    #  @deck.deal_to(hand)
+    #  hand.sort_cards
+    #end
   end
 
   #def set_players(player1=nil, player2=nil, player3=nil, player4=nil)
@@ -56,12 +63,12 @@ class Game < ActiveRecord::Base
   #  end
   #end
 
-  def initialize_hands
-    @hands = []
-    @players.each do |player| 
-      @hands << Hand.new(player) 
-    end
-  end
+#  def initialize_hands(players)
+#    @hands = []
+#    players.each do |player| 
+#      @hands << Hand.find_or_create_by!(player: player) 
+#    end
+#  end
 
 
 

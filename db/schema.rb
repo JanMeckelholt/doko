@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200428052443) do
+ActiveRecord::Schema.define(version: 20200428105356) do
 
   create_table "cards", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -53,7 +53,10 @@ ActiveRecord::Schema.define(version: 20200428052443) do
   create_table "hands", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "player_id"
   end
+
+  add_index "hands", ["player_id"], name: "index_hands_on_player_id"
 
   create_table "players", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -63,11 +66,9 @@ ActiveRecord::Schema.define(version: 20200428052443) do
     t.datetime "remember_created_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "game_id"
   end
 
   add_index "players", ["email"], name: "index_players_on_email", unique: true
-  add_index "players", ["game_id"], name: "index_players_on_game_id"
   add_index "players", ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
 
   create_table "sessions", force: :cascade do |t|

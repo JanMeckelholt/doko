@@ -12,12 +12,13 @@ before_action :authenticate_player!
       @game = Game.find(params[:game])
       @game_player = GamePlayer.find_or_create_by!(game: @game, player: @current_player)
     end
-
-    @players = []
-    @game_players = GamePlayer.where(game_id: @game.id) || []
-    @game_players.each do |game_player|
-      @players << game_player.player
-    end
+   # byebug
+    find_players
+    #@players = []
+    #@game_players = GamePlayer.where(game_id: @game.id) || []
+    #@game_players.each do |game_player|
+    #  @players << game_player.player
+    #end
 
    # scorer = GameScorer.new(@game)
    # session[:players] = @players
@@ -27,25 +28,49 @@ before_action :authenticate_player!
 
   def play
     @current_player = current_player
-    @game = @current_player.game
+    if GamePlayer.find_by(player: @current_player)
+      @game = GamePlayer.find_by(player: @current_player).game
+    end
+    
     if @game
-      @players = @game.players.all
+      find_players
+      @game.start
+      init_players
+
+      #@game.initialize_hands(@players)
+      #@hands = @game.hands
+      
     else 
-      redirect_to :index
+      redirect_to :home_index
     end
 
-    if !@game   
-      @game = Game.new()
-      #@game.set_players(@players[0], @players[1], @players[2], @players[3])
-      @game.initialize_hands
-      @hands = @game.hands
-      @game.start()
-    end
   end
 
 
+private
+  
+  def find_players
+    @players = []
+    @game_players = GamePlayer.where(game_id: @game.id) || []
+    @game_players.each do |game_player|
+      @players << game_player.player
+    @players
+    #byebug
+    end
+  end
 
-
+  def init_players
+    @players.each do |player|
+      #hand = Hand.new(player: player)
+      hand = Hand.find_or_create_by!(player: player)
+      @game.deck.deal_to(hand)
+      #hand = hand.sort_cards
+      hand.save
+      player.save
+      #byebug
+    end
+    @game.deck.destroy!
+  end
 
 
 

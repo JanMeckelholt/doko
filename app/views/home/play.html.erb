@@ -5,7 +5,7 @@
       <h1>Doppelkopf</h1>
       <%= render partial: 'table', locals: { players: @players } %>
     </div>
-    <%= render partial: 'human_player', locals: { game: @game, hand: @game.hands[3] } %>
+    <%= render partial: 'human_player', locals: { game: @game, hand: @current_player.hand } %>
     <%=link_to "Play again!", :home_index, class: "button button-primary" %>
   </div>
 </div>

@@ -1,21 +1,22 @@
 class Hand < ActiveRecord::Base
-#  include ActiveModel::Model
-#has_many :cards
-belongs_to_one :player
+  #include ActiveModel::Model
+  has_many :cards   #, -> { order(order_value) }  
+  belongs_to :player
 
-  attr_accessor :hand_cards
 
-  def initialize
-    @hand_cards = []
-  end
+  #attr_accessor :hand_cards
 
-  def add_card(card)
-    @hand_cards << card
-  end
+  #def initialize(player)
+  #  @hand_cards = []
+  #end
 
-  def play_card(card)
-    @hand_cards.delete(card)
-  end
+  #def add_card(card)
+  #  @hand_cards << card
+  #end
+
+  #def play_card(card)
+  #  @hand_cards.delete(card)
+  #end
 
   #def hand_cards
   #  @hand_cards
@@ -25,8 +26,9 @@ belongs_to_one :player
   def sort_cards
     #@hand_cards.sort! { |a, b| a.numeric_value <=> b.numeric_value }
   #  byebug
-    @hand_cards.sort_by! { |a| a.order_value  }
-  
+    cards = self.cards
+    cards.sort_by! { |a| a.order_value  }
+    cards
   end
 
 

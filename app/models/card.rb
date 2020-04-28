@@ -1,11 +1,12 @@
-class Card #< ActiveRecord::Base
-  include ActiveModel::Model
-  #belongs_to :deck
-  #belongs_to :hand
+class Card < ActiveRecord::Base
+  #include ActiveModel::Model
+  belongs_to :deck
+  belongs_to :hand
 
-  @@suits = [:kreuz, :pik, :herz, :karo]
+#  enum status: [:published, :unpublished, :not_set]
+  enum suits: [:kreuz, :pik, :herz, :karo]
   
-  @@values = {
+  enum values: {
       :zehn => 10,
       :bube => 2,
       :dame => 3,
@@ -38,19 +39,19 @@ class Card #< ActiveRecord::Base
 
 
 
-  def initialize(value, suit)
+#  def initialize(value, suit)
   #  super
-    @value = value
-    @suit = suit
-  end
+#    @value = value
+#    @suit = suit
+#  end
   
-  def value
-    @value
-  end
+  #def value
+  #  @value
+  #end
 
-  def suit
-    @suit
-  end
+  #def suit
+  #  @suit
+  #end
 
   def numeric_value
     @@values[@value]
@@ -61,16 +62,18 @@ class Card #< ActiveRecord::Base
   end
 
   def to_s
-    @suit.to_s.capitalize << "_" << @value.to_s.capitalize
+    self.suit.to_s.capitalize << "_" << self.value.to_s.capitalize
   end
 
-  def self.all_suits
-    @@suits
-  end
+  #def self.all_suits
+  #  self.suits
+  #end
 
-  def self.all_values
-    @@values
-  end
+  #def self.all_values
+  #  self.values
+  #end
+
+
 
 
 end
