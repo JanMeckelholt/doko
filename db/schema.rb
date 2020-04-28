@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200425044918) do
+ActiveRecord::Schema.define(version: 20200428052443) do
 
   create_table "cards", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20200425044918) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "game_players", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "game_players", ["game_id"], name: "index_game_players_on_game_id"
+  add_index "game_players", ["player_id"], name: "index_game_players_on_player_id"
+
   create_table "game_scorers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -44,6 +54,21 @@ ActiveRecord::Schema.define(version: 20200425044918) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "players", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "game_id"
+  end
+
+  add_index "players", ["email"], name: "index_players_on_email", unique: true
+  add_index "players", ["game_id"], name: "index_players_on_game_id"
+  add_index "players", ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false

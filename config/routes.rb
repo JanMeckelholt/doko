@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :players
   root 'home#index'
 
   get 'home/index'
 
+
+
   get 'home/play'
 
-  get 'cards/show'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

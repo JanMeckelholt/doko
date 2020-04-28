@@ -6,8 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-    Card.all_values.keys.each do |value|
-      Card.all_suits.each do|suit| 
-        card = Card.create!(value: value, suit: suit)
-      end
-    end
+    #Card.all_values.keys.each do |value|
+    #  Card.all_suits.each do|suit| 
+    #    card = Card.create!(value: value, suit: suit)
+    #  end
+    #end
+
+game = Game.create!
+player = Player.create!(email: "ab@c.de", password: "123456")

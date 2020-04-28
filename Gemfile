@@ -27,6 +27,8 @@ gem 'activerecord-session_store'
 
 gem 'foundation-rails'
 gem 'autoprefixer-rails'
+gem 'devise'
+gem 'devise-foundation-views'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

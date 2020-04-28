@@ -4,9 +4,23 @@
   <div class="row">
     <div class="large-12 columns">
       <h1>Doppelkopf</h1>
-      <%= render partial: 'table', locals: { players: @players } %>
+      <p>Warte auf Mitspieler...</p>
+
+      	<%= @game %>
+      	<% @players.each do |player| %>
+      		<p>Player : <%=player.email %> </p>
+      	<% end %>
+
+		<%=link_to "Join Game", home_index_path(game: @game), class: "button button-primary" %>
+
+
+
     </div>
-    <%= render partial: 'human_player', locals: { game: @game, hand: @game.hands[3] } %>
-    <%=link_to "Play again!", :home_index, class: "button" %>
+    <%=link_to "show Play!", home_play_path(players: @players), class: "button button-primary" %>
   </div>
-</div>
+ 
+ 
+ <%=@player1%>
+ <%=@player2%>
+ <%=@player3%>
+ <%=@player4%>

@@ -1,2 +1,11 @@
-<h1>Home#play</h1>
-<p>Find me in app/views/home/play.html.erb</p>
+<% content_for :title, "Doppelkopf" %>
+<%=@game.players%>
+  <div class="row">
+    <div class="large-12 columns">
+      <h1>Doppelkopf</h1>
+      <%= render partial: 'table', locals: { players: @players } %>
+    </div>
+    <%= render partial: 'human_player', locals: { game: @game, hand: @game.hands[3] } %>
+    <%=link_to "Play again!", :home_index, class: "button button-primary" %>
+  </div>
+</div>
