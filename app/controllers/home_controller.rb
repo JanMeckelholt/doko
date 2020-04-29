@@ -34,7 +34,8 @@ before_action :authenticate_player!
     
     if @game
       find_players
-      @game.start
+      @deck = Deck.new
+      @deck.build_deck
       init_players
 
       #@game.initialize_hands(@players)
@@ -54,22 +55,23 @@ private
     @game_players = GamePlayer.where(game_id: @game.id) || []
     @game_players.each do |game_player|
       @players << game_player.player
-    @players
-    #byebug
-    end
+    end  
   end
 
   def init_players
     @players.each do |player|
       #hand = Hand.new(player: player)
       hand = Hand.find_or_create_by!(player: player)
-      @game.deck.deal_to(hand)
-      #hand = hand.sort_cards
+      @deck.deal_to(hand)
       hand.save
       player.save
-      #byebug
     end
-    @game.deck.destroy!
+      #@deck.deal(@players[0].hand, @players[0].hand, @players[0].hand, @players[0].hand)
+      #hand = hand.sort_cards
+      #hand.save
+      #player.save
+      #byebug
+    #@game.deck.destroy!
   end
 
 

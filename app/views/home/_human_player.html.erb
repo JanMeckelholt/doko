@@ -8,7 +8,7 @@
     
   <div class="row small-up-2 medium-up-3 large-up-4">
     <%# byebug %>
-    <% @current_player.hand.cards.each do |card| %>
+    <% @current_player.hand.get_cards.each do |card| %>
       <div class="column column-block">
         <div class="card">
           <div class="card-image float-center">
