@@ -3,17 +3,25 @@
 
       
   <div class="row small-up-2 medium-up-3 large-up-4">
-    <% players.each do |player| %>
-      <div class="column column-block">
+    <div class="column column-block">
         <div class="card">
           <div class="card-image float-center">
-            <img src="/assets/cards/back.png">
+            <img src="/assets/cards/<%=game.trick.card1%>.png">
+            
           </div>
-          <div class="card-section float-center">Karte von: <%=player%></div>
+          <div class="card-section float-center">Karte von: </div>
         </div>
       </div>
-    <% end %>
+
   </div>
   
+<div class="card">
+  <div class="card-image float-center">
+     <img src="/assets/cards/back.png">
+  </div>
+  <div class="card-section float-center">Karte von: Mir</div>
+</div>
+
+<%= link_to "Neues Spiel", home_create_game_path(players: players, game: game), method: :post %>
 
 </div>

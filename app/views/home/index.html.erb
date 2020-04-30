@@ -11,12 +11,12 @@
       		<p>Player : <%=player.email %> </p>
       	<% end %>
 
-		<%=link_to "Join Game", home_index_path(game: @game), class: "button button-primary" %>
+		<%=link_to "Join Game", home_join_game_path, method: :post, class: "button button-primary" %>
 
 
 
     </div>
-    <%=link_to "show Play!", home_play_path(players: @players), class: "button button-primary" %>
+    <%=link_to "Play!", home_create_game_path(players: @players), method: :post, class: "button button-primary" %>
   </div>
  
  

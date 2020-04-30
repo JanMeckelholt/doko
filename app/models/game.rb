@@ -2,9 +2,10 @@ class Game < ActiveRecord::Base
   #include ActiveModel::Model
   #has_one :deck
 
-  belongs_to :player
-  has_many :game_players
-  has_many :players, :through => :game_players, :source => :player
+  #belongs_to :player
+  has_many :game_players, dependent: :destroy 
+  has_many :players, :through => :game_players #, :source => :player
+  has_one :trick, dependent: :destroy 
 
 
 

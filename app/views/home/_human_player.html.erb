@@ -13,10 +13,10 @@
         <div class="card">
           <div class="card-image float-center">
             <%# byebug %>
-            <img src="/assets/cards/<%= card.to_s.tr(" ","-") %>.png">
+            <img src="/assets/cards/<%= card %>.png">
           </div>
           <div class="card-section float-center">
-            <%=link_to "Karte spielen", home_play_path(card: card), class: "button button-primary" %>
+            <%=link_to "Karte spielen", home_play_path(card: card, player: @current_player), class: "button button-primary" %>
           </div>
         </div>
       </div>

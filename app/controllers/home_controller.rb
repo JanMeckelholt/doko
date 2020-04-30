@@ -4,48 +4,59 @@ before_action :authenticate_player!
 
    def index
     @current_player = current_player
-    if !@game
-      @game = Game.first || Game.create!
-    end
+    @game = Game.all.first || Game.create!
+    find_players 
+  end #index
 
-    if params[:game]
-      @game = Game.find(params[:game])
-      @game_player = GamePlayer.find_or_create_by!(game: @game, player: @current_player)
-    end
+  def join_game
+    @current_player = current_player
    # byebug
-    find_players
-    #@players = []
-    #@game_players = GamePlayer.where(game_id: @game.id) || []
-    #@game_players.each do |game_player|
-    #  @players << game_player.player
-    #end
-
-   # scorer = GameScorer.new(@game)
-   # session[:players] = @players
-   # session[:the_score] = scorer
+    @game = Game.all.first || Game.create!
+    @game_player = GamePlayer.find_or_create_by!(game: @game, player: @current_player)
+    redirect_to :home_index
   end
+
 
 
   def play
     @current_player = current_player
     if GamePlayer.find_by(player: @current_player)
       @game = GamePlayer.find_by(player: @current_player).game
-    end
-    
-    if @game
       find_players
-      @deck = Deck.new
-      @deck.build_deck
-      init_players
-
-      #@game.initialize_hands(@players)
-      #@hands = @game.hands
-      
+      #byebug
     else 
       redirect_to :home_index
     end
+  end #play
 
-  end
+  def create_game
+    if params[:game]
+      @game = Game.find(params[:game])
+    end
+    if @game
+      @game.destroy!
+    end
+    @game = Game.all.first || Game.create!
+    
+    @current_player = current_player
+
+    
+    @players = []
+    params[:players].each do |player_id|
+      @players << Player.find(player_id)
+    end
+    @players.each do |player|
+      @game_player = GamePlayer.create!(game: @game, player: player)
+    end
+    @deck = Deck.new
+    @deck.build_deck
+    init_players
+    @trick = Trick.create!(game: @game, card1: "back", card2: "back", card3: "back", card4: "back")
+    
+    #byebug
+    
+    redirect_to :home_play
+  end #create
 
 
 private
@@ -56,7 +67,7 @@ private
     @game_players.each do |game_player|
       @players << game_player.player
     end  
-  end
+  end #find_players
 
   def init_players
     @players.each do |player|
@@ -72,7 +83,7 @@ private
       #player.save
       #byebug
     #@game.deck.destroy!
-  end
+  end #init_players
 
 
 

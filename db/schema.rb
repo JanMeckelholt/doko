@@ -11,19 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200429045318) do
-
-  create_table "cards", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "value"
-    t.string   "suit"
-    t.integer  "hand_id"
-    t.integer  "deck_id"
-  end
-
-  add_index "cards", ["deck_id"], name: "index_cards_on_deck_id"
-  add_index "cards", ["hand_id"], name: "index_cards_on_hand_id"
+ActiveRecord::Schema.define(version: 20200429130010) do
 
   create_table "decks", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -39,11 +27,6 @@ ActiveRecord::Schema.define(version: 20200429045318) do
 
   add_index "game_players", ["game_id"], name: "index_game_players_on_game_id"
   add_index "game_players", ["player_id"], name: "index_game_players_on_player_id"
-
-  create_table "game_scorers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "games", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -90,5 +73,18 @@ ActiveRecord::Schema.define(version: 20200429045318) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
+  create_table "tricks", force: :cascade do |t|
+    t.string   "card1"
+    t.string   "card2"
+    t.string   "card3"
+    t.string   "card4"
+    t.integer  "next"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "game_id"
+  end
+
+  add_index "tricks", ["game_id"], name: "index_tricks_on_game_id"
 
 end

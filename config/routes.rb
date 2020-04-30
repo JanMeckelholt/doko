@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
 
   get 'home/play'
-
+  post 'home/create_game', to: 'home#create_game'
+  post 'home/join_game', to: 'home#join_game'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

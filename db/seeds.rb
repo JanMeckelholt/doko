@@ -12,5 +12,5 @@
     #  end
     #end
 
-game = Game.create!
+#game = Game.create!
 player = Player.create!(email: "ab@c.de", password: "123456")
