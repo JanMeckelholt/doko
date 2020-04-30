@@ -1,11 +1,6 @@
 <% content_for :title, "Doppelkopf" %>
 <%=@game.players%>
-  <div class="row">
-    <div class="large-12 columns">
-      <h1>Doppelkopf</h1>
-      <%= render partial: 'table', locals: { game: @game, players: @players } %>
-    </div>
-    <%= render partial: 'human_player', locals: { game: @game, hand: @current_player.hand } %>
-    <%=link_to "Play again!", :home_index, class: "button button-primary" %>
-  </div>
-</div>
+<h1>Doppelkopf</h1>
+<%= render partial: 'table', locals: { game: @game, players: @players } %>
+<%= render partial: 'human_player', locals: { game: @game, player: @current_player } %>
+<%=link_to "Play again!", :home_index, class: "button button-primary" %>

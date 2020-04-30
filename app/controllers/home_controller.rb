@@ -23,7 +23,6 @@ before_action :authenticate_player!
     if GamePlayer.find_by(player: @current_player)
       @game = GamePlayer.find_by(player: @current_player).game
       find_players
-      #byebug
     else 
       redirect_to :home_index
     end
@@ -48,13 +47,10 @@ before_action :authenticate_player!
     @players.each do |player|
       @game_player = GamePlayer.create!(game: @game, player: player)
     end
-    @deck = Deck.new
+    @deck = Deck.create!(game: @game)
     @deck.build_deck
     init_players
-    @trick = Trick.create!(game: @game, card1: "back", card2: "back", card3: "back", card4: "back")
-    
-    #byebug
-    
+    @trick = Trick.create!(game: @game)
     redirect_to :home_play
   end #create
 

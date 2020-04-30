@@ -3,17 +3,22 @@
 
       
   <div class="row small-up-2 medium-up-3 large-up-4">
-    <div class="column column-block">
+    <%# byebug %>
+    <% @game.trick.cards.each do |card| %>
+      <div class="column column-block">
         <div class="card">
           <div class="card-image float-center">
-            <img src="/assets/cards/<%=game.trick.card1%>.png">
-            
+            <%# byebug %>
+            <img src="/assets/cards/<%= card %>.png">
           </div>
-          <div class="card-section float-center">Karte von: </div>
+          <div class="card-section float-center">
+            Trick-Karte
+          </div>
         </div>
       </div>
-
+    <% end %>
   </div>
+
   
 <div class="card">
   <div class="card-image float-center">

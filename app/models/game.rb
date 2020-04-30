@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   #include ActiveModel::Model
-  #has_one :deck
+  has_one :deck, dependent: :destroy 
 
   #belongs_to :player
   has_many :game_players, dependent: :destroy 
