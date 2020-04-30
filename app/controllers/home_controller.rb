@@ -2,6 +2,7 @@ class HomeController < ApplicationController
 before_action :authenticate_player!
 
 
+
    def index
     @current_player = current_player
     @game = Game.all.first || Game.create!
@@ -33,6 +34,7 @@ before_action :authenticate_player!
       @game = Game.find(params[:game])
     end
     if @game
+      destroy_player_hands
       @game.destroy!
     end
     @game = Game.all.first || Game.create!
@@ -47,21 +49,37 @@ before_action :authenticate_player!
     @players.each do |player|
       @game_player = GamePlayer.create!(game: @game, player: player)
     end
-    @deck = Deck.create!(game: @game)
+    @deck = @game.deck || Deck.create!(game: @game)
     @deck.build_deck
     init_players
     @trick = Trick.create!(game: @game)
     redirect_to :home_play
   end #create
 
+  def play_card
+    @card = Card.find(params[:card])
+    @current_player = current_player
+    @game = Game.find(params[:game])
+    if @current_player.hand.cards.count + @game.round == 10
+      @card.trick = @game.trick
+      @card.hand = nil
+      @card.save
+    end
+    #byebug
+    redirect_to :home_play
+  end
+
+
 
 private
+
+
   
   def find_players
     @players = []
-    @game_players = GamePlayer.where(game_id: @game.id) || []
-    @game_players.each do |game_player|
-      @players << game_player.player
+    @player_ids = GamePlayer.where(game_id: @game.id).distinct.pluck(:player_id) || []
+    @player_ids.each do |player_id|
+      @players << Player.find(player_id)
     end  
   end #find_players
 
@@ -73,14 +91,13 @@ private
       hand.save
       player.save
     end
-      #@deck.deal(@players[0].hand, @players[0].hand, @players[0].hand, @players[0].hand)
-      #hand = hand.sort_cards
-      #hand.save
-      #player.save
-      #byebug
-    #@game.deck.destroy!
   end #init_players
 
-
+  def destroy_player_hands
+    find_players
+    @players.each do |player|
+      player.hand.destroy!
+    end
+  end
 
 end

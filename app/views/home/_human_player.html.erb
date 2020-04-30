@@ -16,7 +16,7 @@
             <img src="/assets/cards/<%= card.name %>.png">
           </div>
           <div class="card-section float-center">
-            <%=link_to "Karte spielen", home_play_path(card: card, player: @current_player), class: "button button-primary" %>
+            <%=link_to "Karte spielen", home_play_card_path(card: card, game: @game), method: :post, class: "button button-primary" %>
           </div>
         </div>
       </div>
