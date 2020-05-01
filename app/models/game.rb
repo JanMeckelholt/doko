@@ -7,6 +7,23 @@ class Game < ActiveRecord::Base
   has_many :players, :through => :game_players #, :source => :player
   has_one :trick, dependent: :destroy 
 
+  validates :game_players, length:{maximum: 4}
+
+  def player_to_play(players)
+    players[self.next_player-1]
+  end
+
+  def to_next_player
+    case self.next_player
+    when 0 , 4
+      self.next_player=1
+      self.round +=1
+    when 1..3 
+      self.next_player +=1
+    else
+      self.next_player = 0
+    end
+  end
 
 
 

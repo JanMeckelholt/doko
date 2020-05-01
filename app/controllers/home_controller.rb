@@ -13,7 +13,12 @@ before_action :authenticate_player!
     @current_player = current_player
    # byebug
     @game = Game.all.first || Game.create!
-    @game_player = GamePlayer.find_or_create_by!(game: @game, player: @current_player)
+    find_players
+    if @players.include? @current_player
+      flash[:notice] = "You already joined!"
+    else
+      @game_player = GamePlayer.find_or_create_by!(game: @game, player: @current_player)
+    end
     redirect_to :home_index
   end
 
@@ -29,27 +34,18 @@ before_action :authenticate_player!
     end
   end #play
 
-  def create_game
-    if params[:game]
-      @game = Game.find(params[:game])
-    end
-    if @game
-      destroy_player_hands
-      @game.destroy!
-    end
+  def create_game 
     @game = Game.all.first || Game.create!
-    
+    reset_game
     @current_player = current_player
-
-    
-    @players = []
-    params[:players].each do |player_id|
-      @players << Player.find(player_id)
+    if params[:players]
+      find_players_by_params
     end
     @players.each do |player|
       @game_player = GamePlayer.create!(game: @game, player: player)
     end
-    @deck = @game.deck || Deck.create!(game: @game)
+    @deck = Deck.all.first || Deck.create!
+    @deck.update!(game: @game)
     @deck.build_deck
     init_players
     @trick = Trick.create!(game: @game)
@@ -60,10 +56,14 @@ before_action :authenticate_player!
     @card = Card.find(params[:card])
     @current_player = current_player
     @game = Game.find(params[:game])
-    if @current_player.hand.cards.count + @game.round == 10
-      @card.trick = @game.trick
-      @card.hand = nil
-      @card.save
+    find_players
+    if (@game.player_to_play(@players)==@current_player) && (@current_player.hand.cards.count + @game.round == 10)
+      @card.update!(trick: @game.trick, hand: nil)
+      @game.to_next_player
+      @game.save
+    else
+      flash[:notice] = 'Not your turn!'
+      #byebug
     end
     #byebug
     redirect_to :home_play
@@ -83,6 +83,13 @@ private
     end  
   end #find_players
 
+  def find_players_by_params
+    @players = []
+    params[:players].each do |player_id|
+      @players << Player.find(player_id)
+    end
+  end
+
   def init_players
     @players.each do |player|
       #hand = Hand.new(player: player)
@@ -96,8 +103,27 @@ private
   def destroy_player_hands
     find_players
     @players.each do |player|
-      player.hand.destroy!
+      if player.hand
+        player.hand.destroy!
+      end
     end
   end
+
+  def destroy_game_players
+    find_players
+    @players.each do |player|
+      player.game_player.destroy!  
+    end 
+  end 
+
+  def reset_game
+    @game.update!(round: 0, next_player:1)
+    if @game.trick
+      @game.trick.destroy!
+    end
+    destroy_player_hands
+    destroy_game_players
+  end
+
 
 end

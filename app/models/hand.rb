@@ -4,6 +4,7 @@ class Hand < ActiveRecord::Base
   has_many :cards   #, -> { order(order_value) }  
   belongs_to :player
  
+  validates :cards, length:{maximum: 10}
 
    
 

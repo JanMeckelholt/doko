@@ -14,3 +14,34 @@
 
 #game = Game.create!
 player = Player.create!(email: "ab@c.de", password: "123456")
+
+  CARDS = [
+    "Herz_Zehn",
+    "Kreuz_Dame",
+    "Pik_Dame",
+    "Herz_Dame",
+    "Karo_Dame",
+    "Kreuz_Bube",
+    "Pik_Bube",
+    "Herz_Bube",
+    "Karo_Bube",
+    "Karo_Ass",
+    "Karo_Zehn",
+    "Karo_Koenig",
+    "Kreuz_Ass",
+    "Kreuz_Zehn",
+    "Kreuz_Koenig",
+    "Pik_Ass",
+    "Pik_Zehn",
+    "Pik_Koenig",
+    "Herz_Ass",
+    "Herz_Koenig"
+  ]
+
+game = Game.create!
+deck = Deck.create!(game: game)
+
+CARDS.each do |card|
+	Card.create!(name: card, deck: deck)
+    Card.create!(name: card, deck: deck)
+end
