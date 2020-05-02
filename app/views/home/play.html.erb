@@ -1,5 +1,4 @@
 <% content_for :title, "Doppelkopf" %>
-<%=@game.players%>
 <h1>Doppelkopf</h1>
 <%= render partial: 'table', locals: { game: @game, players: @players } %>
 <%= render partial: 'human_player', locals: { game: @game, player: @current_player } %>

@@ -15,7 +15,7 @@ before_action :authenticate_player!
     @game = Game.all.first || Game.create!
     find_players
     if @players.include? @current_player
-      flash[:notice] = "You already joined!"
+      flash[:alert] = "You already joined!"
     else
       @game_player = GamePlayer.find_or_create_by!(game: @game, player: @current_player)
     end
@@ -62,7 +62,7 @@ before_action :authenticate_player!
       @game.to_next_player
       @game.save
     else
-      flash[:notice] = 'Not your turn!'
+      flash[:alert] = 'Not your turn!'
       #byebug
     end
     #byebug

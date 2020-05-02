@@ -1,24 +1,23 @@
 <div class="hand you %>">
   <div class="row">
     <div class="large-2 columns text-center">
-      <div class="avatar" style="background: #fff url(/assets/cards/jason_seifer.jpg) no-repeat top center; background-size: auto 100%;"></div>
+      <div class="avatar" style="background: #fff url(/assets/images/cards/jason_seifer.jpg) no-repeat top center; background-size: auto 100%;"></div>
       <span class="player-name"><%= @current_player.email %></span>
     </div>
   </div>
     
-  <div class="row small-up-2 medium-up-3 large-up-4">
+  <div class="row small-up-2 medium-up-3 large-up-5">
     <%# byebug %>
     <% @current_player.hand.cards.each do |card| %>
       <div class="column column-block">
+        
         <div class="card">
-          <div class="card-image float-center">
-            <%# byebug %>
-            <img src="/assets/cards/<%= card.name %>.png">
-          </div>
-          <div class="card-section float-center">
+          <img src="/assets/cards/<%= card.name %>.png">
+          <div class="card-section">
             <%=link_to "Karte spielen", home_play_card_path(card: card, game: @game), method: :post, class: "button button-primary" %>
           </div>
         </div>
+      
       </div>
     <% end %>
   </div>
