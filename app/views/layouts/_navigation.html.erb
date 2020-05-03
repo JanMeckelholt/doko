@@ -1,8 +1,12 @@
-<%# navigation styled for Zurb Foundation 5 %>
-<nav class="top-bar" data-topbar>
-  <div class="top-bar-section">
-    <ul>
-      <%= render 'layouts/navigation_links' %>
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">Doppelkopf</li>
     </ul>
   </div>
-</nav>
+  <div class="top-bar-right">
+    <ul class="menu">
+		<%= render 'layouts/navigation_links' %>
+    </ul>
+  </div>
+</div>

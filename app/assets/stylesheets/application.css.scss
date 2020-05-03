@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,8 +11,73 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
-//= require_self
+
 //= require foundation_and_overrides
 //= require devise_foundation_views_scss
 //= require_tree .
+//= require_self
  */
+
+
+
+
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  text-align: center;
+
+}
+
+.play-table{
+	background-color: gray;
+	margin-top: 0px;
+	margin-bottom: 80px;
+	border: 2px solid black;
+}
+.human-player{
+	background-color: gray;
+	margin-top: 0px;
+	padding-top: 10px;
+	padding-botoom: 20px;
+	border: 2px solid black;
+}
+
+.table-links{
+	margin-top: 20px;
+	border: none;
+}
+
+.play-card{
+	border: none;
+	background-color: inherit;
+	margin-top: 20px;
+	.card-section{
+		padding:0;
+	}
+}
+
+
+
+
+/*
+ * Custom Styles
+ */
+
+.card-block {
+  color: black;
+  text-align: left;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+ /* overflow: auto;
+     max-height: 80vh;*/
+}
+

@@ -1,5 +1,16 @@
 <% content_for :title, "Doppelkopf" %>
-<h1>Doppelkopf</h1>
-<%= render partial: 'table', locals: { game: @game, players: @players } %>
-<%= render partial: 'human_player', locals: { game: @game, player: @current_player } %>
-<%=link_to "Tisch verlassen!", :home_index, class: "button button-primary" %>
+<div class="grid-x">
+  	<div class="cell">
+		<h1>Doppelkopf</h1>
+   	</div>
+	<div class="cell">
+		<%= render partial: 'table' %>
+	</div>
+	<div class="cell">
+		<%= render partial: 'human_player' %>
+		
+	</div>
+	<div class="cell">
+		<%= render partial: 'table_links' %>
+	</div>
+</div>

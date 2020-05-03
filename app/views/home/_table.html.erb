@@ -1,26 +1,23 @@
-<div class="table">
-
-
-  <h2>Spieltisch</h2>    
-  <div class="row small-up-2 medium-up-3 large-up-4">
-    <%# byebug %>
-    <% @game.trick.cards.each do |card| %>
-      <div class="column column-block">
-        <div class="card">
-          <div class="card-image float-center">
-              <img src="/assets/cards/<%= card.name %>.png">
-          </div>
-          <div class="card-section float-center">
-            Trick-Karte
-          </div>
+<div class="row small-up-2 medium-up-3 large-up-5">
+    <h2>Spieltisch:</h2>   
+</div>
+<div class="row small-up-2 medium-up-3 large-up-5 play-table">
+  <% @game.trick.cards.each do |card| %>
+    <div class="column column-block">
+      <div class="card play-card">
+        <div class="card-image float-center">
+          <img src="/assets/cards/<%= card.name %>.png">
+        </div>
+        <div class="card-section float-center">
+          Trick-Karte
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
+</div>
 
   
 
 
-<%= link_to "Neues Spiel", home_create_game_path(players: @players, game: @game), method: :post, class: "button button-primary" %>
 
-</div>
+
